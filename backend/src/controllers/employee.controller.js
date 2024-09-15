@@ -4,7 +4,7 @@ import { ApiResponse } from "../utils/ApiResponse.js";
 import uploadOnCloudinary from "../utils/cloudinary.js";
 import { Employee } from "../models/employee.model.js";
 
-// Routes to save/create a new employee
+//NOTE: Routes to save/create a new employee
 const newEmployee = asyncHandler(async (req, res) => {
   const { name, email, phone, designation, gender, course } = req.body;
 
@@ -70,4 +70,24 @@ const newEmployee = asyncHandler(async (req, res) => {
   }
 });
 
-export { newEmployee };
+//NOTE: Route to get all employees from the database
+const allEmployees = async (req, res) => {
+  try {
+    const employees = await Employee.find({});
+    return res.status(200).json(
+      new ApiResponse(
+        200,
+        {
+          count: employees.length,
+          data: employees,
+        },
+        "All employees fetched successfully"
+      )
+    );
+  } catch (error) {
+    console.log(error.message);
+    throw new ApiError(500, "Catch :: Failed to get employees");
+  }
+};
+
+export { newEmployee, allEmployees };

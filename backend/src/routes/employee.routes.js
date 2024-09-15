@@ -1,5 +1,8 @@
 import { Router } from "express";
-import { newEmployee } from "../controllers/employee.controller.js";
+import {
+  allEmployees,
+  newEmployee,
+} from "../controllers/employee.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
 
@@ -15,5 +18,7 @@ router.route("/new-employee").post(
   ]),
   newEmployee
 );
+
+router.route("/allEmployees").get(allEmployees);
 
 export default router;
