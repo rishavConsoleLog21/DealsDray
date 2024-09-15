@@ -90,4 +90,26 @@ const allEmployees = async (req, res) => {
   }
 };
 
-export { newEmployee, allEmployees };
+//NOTE: Route to get One employees from the database
+const getOneEmployee = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const employee = await Employee.findById(id);
+    if (!employee) {
+      return res.status(404).json(new ApiError(404, "Employee not found"));
+    }
+    return res
+      .status(200)
+      .json(
+        new ApiResponse(
+          200,
+          employee,
+          `Employee id: ${id} fetched successfully`
+        )
+      );
+  } catch (error) {
+    throw new ApiError(500, "Catch :: Failed to get employee");
+  }
+};
+
+export { newEmployee, allEmployees, getOneEmployee };

@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   allEmployees,
+  getOneEmployee,
   newEmployee,
 } from "../controllers/employee.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
@@ -20,5 +21,6 @@ router.route("/new-employee").post(
 );
 
 router.route("/allEmployees").get(allEmployees);
+router.route("/:id").get(getOneEmployee);
 
 export default router;
