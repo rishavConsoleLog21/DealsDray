@@ -21,9 +21,9 @@ const registerUser = asyncHandler(async (req, res) => {
 
   const avatarLocalPath = req.files?.avatar[0]?.path;
 
-  if (!avatarLocalPath) {
-    throw new ApiError(400, "Please provide an avatar image");
-  }
+  // if (!avatarLocalPath) {
+  //   throw new ApiError(400, "Please provide an avatar image");
+  // }
 
   const avatar = await uploadOnCloudinary(avatarLocalPath);
 
@@ -31,10 +31,10 @@ const registerUser = asyncHandler(async (req, res) => {
   //   throw new ApiError(500, "Failed to upload avatar image")}
 
   const user = await User.create({
-    username: username.toLowerCase(),
+    username: username,
     email,
     password,
-    avatar: avatar.url || "",
+    avatar: avatar?.url || "",
   });
 
   const createdUser = await User.findById(user._id).select(
