@@ -1,13 +1,13 @@
 import mongoose, { Schema } from "mongoose";
 import paginate from "mongoose-paginate-v2";
 
-const empolyeeSchema = Schema(
+const empolyeeSchema = new Schema(
   {
     name: { type: String, required: [true, "Name is required"] },
     email: {
       type: String,
       required: [true, "Email is required"],
-      unique: true,
+      unique: [true, "Email already exists"],
     },
     phone: {
       type: Number,

@@ -15,10 +15,10 @@ const uploadOnCloudinary = async (localFile) => {
       folder: "dealsDray",
       allowed_formats: ["jpg", "png"],
       chunk_size: 6000000,
-      resource_type: "image",
+      resource_type: "auto",
     });
-    console.log("file uploaded successfully", response.url);
-    return response.url;
+    fs.unlinkSync(localFile); //Remove the locally saved file after upload
+    return response;
   } catch (error) {
     fs.unlinkSync(localFile); //Remove the locally saved file if upload fails
     return null;

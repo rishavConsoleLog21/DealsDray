@@ -22,8 +22,13 @@ app.use(cookieParser());
 
 //routes import
 import userRoutes from "./routes/user.routes.js";
+import employeeRoutes from "./routes/employee.routes.js";
 
 //routes use
+app.get("/api/v1/", (req, res) => {
+  res.send("Welcome to Employee Management System API");
+});
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/employees", employeeRoutes);
 
 export { app };
