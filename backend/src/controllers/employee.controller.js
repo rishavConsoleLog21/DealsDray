@@ -35,18 +35,18 @@ const newEmployee = asyncHandler(async (req, res) => {
 
     const imageLocalPath = req.files?.image[0]?.path;
 
-    if (!imageLocalPath) {
-      throw new ApiError(400, "Please provide an image");
-    }
+    // if (!imageLocalPath) {
+    //   throw new ApiError(400, "Please provide an image");
+    // }
 
     const image = await uploadOnCloudinary(imageLocalPath);
 
-    if (!image) {
-      throw new ApiError(500, "Failed to upload image");
-    }
+    // if (!image) {
+    //   throw new ApiError(500, "Failed to upload image");
+    // }
 
     const employee = await Employee.create({
-      image: image.url,
+      image: image?.url,
       name,
       email,
       phone,
