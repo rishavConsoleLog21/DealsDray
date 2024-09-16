@@ -22,7 +22,7 @@ router.route("/new-employee").post(
   newEmployee
 );
 
-router.route("/all-employees").get(allEmployees);
+router.route("").get(allEmployees);
 router.route("/:id").get(getOneEmployee);
 router.route("/:id").put(updateEmployee);
 router.route("/:id").delete(deleteEmployee);
