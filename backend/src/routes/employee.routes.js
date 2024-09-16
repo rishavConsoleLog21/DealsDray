@@ -1,6 +1,7 @@
 import { Router } from "express";
 import {
   allEmployees,
+  deleteEmployee,
   getOneEmployee,
   newEmployee,
   updateEmployee,
@@ -21,8 +22,9 @@ router.route("/new-employee").post(
   newEmployee
 );
 
-router.route("/allEmployees").get(allEmployees);
+router.route("/all-employees").get(allEmployees);
 router.route("/:id").get(getOneEmployee);
 router.route("/:id").put(updateEmployee);
+router.route("/:id").delete(deleteEmployee);
 
 export default router;
