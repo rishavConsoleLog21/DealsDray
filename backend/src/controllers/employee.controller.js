@@ -85,7 +85,6 @@ const allEmployees = async (req, res) => {
       )
     );
   } catch (error) {
-    console.log(error.message);
     throw new ApiError(500, "Catch :: Failed to get employees");
   }
 };
@@ -134,7 +133,6 @@ const updateEmployee = async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, employee, "Employee updated successfully"));
   } catch (error) {
-    console.log(error.message);
     throw new ApiError(500, "Catch :: Failed to update employee");
   }
 };
@@ -144,7 +142,6 @@ const deleteEmployee = async (req, res) => {
   try {
     const { id } = req.params;
     const employee = await Employee.findByIdAndDelete(id);
-    console.log(employee);
     if (!employee) {
       return res
         .status(404)
@@ -154,7 +151,6 @@ const deleteEmployee = async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, "Employee deleted successfully"));
   } catch (error) {
-    console.log(error.message);
     throw new ApiError(500, "Catch :: Failed to delete employee");
   }
 };
