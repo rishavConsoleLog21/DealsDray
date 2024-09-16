@@ -53,7 +53,7 @@ Before running this application, ensure you have the following installed:
     npm run dev
     ```
 
-3. Open your browser and go to `http://localhost:5000` to view the application.
+3. Open your browser and go to `http://localhost:5173/` to view the application.
 
 ## Endpoints
 
