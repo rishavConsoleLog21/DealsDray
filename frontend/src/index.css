@@ -1,3 +1,8 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+body {
+    @apply bg-gradient-to-r from-pink-200 via-blue-300 to-sky-300;
+    @apply font-sans;
+  }
