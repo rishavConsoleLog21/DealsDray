@@ -112,4 +112,54 @@ const getOneEmployee = async (req, res) => {
   }
 };
 
-export { newEmployee, allEmployees, getOneEmployee };
+//TODO: Route to update an employee
+const updateEmployee = async (req, res) => {
+  const { name, email, phone, designation, gender, course } = req.body;
+  try {
+    if (
+      [name, email, phone, designation, gender, course].some(
+        (field) => field?.trim() === ""
+      )
+    ) {
+      throw new ApiError(400, "Please provide all required fields");
+    }
+
+    if (phone.length !== 10) {
+      throw new ApiError(400, "Phone number should be 10 digits");
+    }
+
+    const { id } = req.params;
+
+    const employee = await Employee.findByIdAndUpdate(id, req.body);
+
+    if (!employee) {
+      return res
+        .status(404)
+        .json(new ApiResponse(404, null, "Employee not found"));
+    }
+
+    return res
+      .status(200)
+      .json(new ApiResponse(200, employee, "Employee updated successfully"));
+  } catch (error) {
+    throw new ApiError(500, "Catch :: Failed to update employee");
+  }
+};
+
+// // Route to delete an employee
+// router.delete("/:id", async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const result = await Employee.findByIdAndDelete(id);
+//     if (!result) {
+//       return res.status(404).json({ message: "Employee not found" });
+//     }
+
+//     return res.status(200).json({ message: "Employee deleted successfully" });
+//   } catch (error) {
+//     console.log(error.message);
+//     res.status(500).send({ message: error.message });
+//   }
+// });
+
+export { newEmployee, allEmployees, getOneEmployee, updateEmployee };

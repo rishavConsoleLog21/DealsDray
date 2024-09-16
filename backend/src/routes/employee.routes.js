@@ -3,6 +3,7 @@ import {
   allEmployees,
   getOneEmployee,
   newEmployee,
+  updateEmployee,
 } from "../controllers/employee.controller.js";
 import { upload } from "../middlewares/multer.middleware.js";
 import { verifyJwt } from "../middlewares/auth.middleware.js";
@@ -22,5 +23,6 @@ router.route("/new-employee").post(
 
 router.route("/allEmployees").get(allEmployees);
 router.route("/:id").get(getOneEmployee);
+router.route("/:id").put(updateEmployee);
 
 export default router;
