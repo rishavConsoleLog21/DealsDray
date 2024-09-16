@@ -116,16 +116,8 @@ const getOneEmployee = async (req, res) => {
 const updateEmployee = async (req, res) => {
   const { name, email, phone, designation, gender, course } = req.body;
   try {
-    if (
-      [name, email, phone, designation, gender, course].some(
-        (field) => field?.trim() === ""
-      )
-    ) {
+    if (!(name && email && phone && designation && gender && course)) {
       throw new ApiError(400, "Please provide all required fields");
-    }
-
-    if (phone.length !== 10) {
-      throw new ApiError(400, "Phone number should be 10 digits");
     }
 
     const { id } = req.params;
@@ -142,6 +134,7 @@ const updateEmployee = async (req, res) => {
       .status(200)
       .json(new ApiResponse(200, employee, "Employee updated successfully"));
   } catch (error) {
+    console.log(error.message);
     throw new ApiError(500, "Catch :: Failed to update employee");
   }
 };

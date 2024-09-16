@@ -97,26 +97,26 @@ const Home = () => {
             <tr className="bg-slate-300">
               <th
                 onClick={() => sorting("_id")}
-                className="border border-slate-600 rounded-md"
+                className="border border-slate-600 rounded-md hover:cursor-pointer"
               >
                 Unique ID
               </th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
+              <th className="border border-slate-600 rounded-md">
                 Image
               </th>
               <th
                 onClick={() => sorting("name")}
-                className="border border-slate-600 rounded-md max-md:hidden"
+                className="border border-slate-600 rounded-md max-md:hidden hover:cursor-pointer"
               >
                 Name
               </th>
               <th
                 onClick={() => sorting("email")}
-                className="border border-slate-600 rounded-md max-md:hidden"
+                className="border border-slate-600 rounded-md hover:cursor-pointer"
               >
                 Email Id
               </th>
-              <th className="border border-slate-600 rounded-md max-md:hidden">
+              <th className="border border-slate-600 rounded-md">
                 Mobile No
               </th>
               <th className="border border-slate-600 rounded-md max-md:hidden">
@@ -130,7 +130,7 @@ const Home = () => {
               </th>
               <th
                 onClick={() => sorting("createdAt")}
-                className="border border-slate-600 rounded-md max-md:hidden"
+                className="border border-slate-600 rounded-md max-md:hidden hover:cursor-pointer"
               >
                 Created At
               </th>
@@ -142,35 +142,35 @@ const Home = () => {
           <tbody>
             {currentEmployees.map((employee, index) => (
               <tr key={employee._id}>
-                <td className="border border-slate-700 rounded-md max-md:hidden py-2">
+                <td className="border border-slate-700 rounded-md max-md:hidden py-2 flex justify-center">
                   {employee._id}
                 </td>
-                <td className="border border-slate-700 rounded-md max-md:hidden py-2">
+                <td className="border border-slate-700 rounded-md py-0">
                   <img
                     src={employee.image}
                     alt={employee.name}
                     className="h-10 w-10 rounded-full"
                   />
                 </td>
-                <td className="border border-slate-700 rounded-md max-md:hidden py-2">
+                <td className="border border-slate-700 rounded-md max-md:hidden py-2 flex justify-center">
                   {employee.name}
                 </td>
-                <td className="border border-slate-700 rounded-md max-md:hidden py-2">
+                <td className="border border-slate-700 rounded-md py-2">
                   {employee.email}
                 </td>
-                <td className="border border-slate-700 rounded-md max-md:hidden py-2">
+                <td className="border border-slate-700 rounded-md max-md:hidden py-2 flex justify-center">
                   {employee.phone}
                 </td>
                 <td className="border border-slate-700 rounded-md max-md:hidden py-2">
                   {employee.designation}
                 </td>
-                <td className="border border-slate-700 rounded-md max-md:hidden py-2">
+                <td className="border border-slate-700 rounded-md max-md:hidden py-2 flex justify-center">
                   {employee.gender}
                 </td>
                 <td className="border border-slate-700 rounded-md max-md:hidden py-2">
                   {employee.course}
                 </td>
-                <td className="border border-slate-700 rounded-md max-md:hidden py-2">
+                <td className="border border-slate-700 rounded-md max-md:hidden py-2 flex justify-center">
                   {new Date(employee.createdAt).toLocaleDateString()}
                 </td>
                 <td className="border border-slate-700 rounded-md max-md:hidden py-2">
