@@ -16,16 +16,9 @@ function classNames(...classes) {
 export default function Navbar() {
   const [user, setUser] = useState("");
   const navigate = useNavigate();
-  const handleLogout = async () => {
-    try {
-      await axios.post("http://localhost:5000/api/v1/users/logout");
-      setUser("");
-      navigate("/login");
-      toast.success("Logged out successfully");
-    } catch (error) {
-      console.error(error);
-      toast.error("Failed to logout");
-    }
+
+  const navigateToSignup = () => {
+    navigate("/register");
   };
 
   return (
@@ -119,9 +112,9 @@ export default function Navbar() {
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
-                            onClick={handleLogout}
+                            onClick={navigateToSignup}
                           >
-                            Log Out
+                            Register
                           </a>
                         )}
                       </Menu.Item>
