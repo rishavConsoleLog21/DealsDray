@@ -5,56 +5,42 @@ import { toast } from "react-toastify";
 
 const Login = () => {
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState({
+  const [formData, setFormData] = useState({
     email: "",
     password: "",
   });
-  const { email, password } = inputValue;
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
-  };
 
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-left",
-    });
+  const { email, password } = formData;
+
+  const handleOnChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
-        "http://localhost:5000/api/v1/users/login",
-        {
-          ...inputValue,
-        },
-        { withCredentials: true }
-      );
-      console.log(data);
-      const { success, message } = data;
+      const res = await axios.post("http://localhost:5000/api/v1/users/login", {
+        email,
+        password,
+      });
+      const { success, message } = res.data;
       if (success) {
-        handleSuccess(message);
+        toast.success(message, {
+          position: "bottom-left",
+        });
         setTimeout(() => {
           navigate("/");
         }, 1000);
       } else {
-        handleError(message);
+        toast.error(message, {
+          position: "bottom-left",
+        });
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Server Error", {
+        position: "bottom-left",
+      });
     }
-    setInputValue({
-      ...inputValue,
-      email: "",
-      password: "",
-    });
   };
 
   return (
@@ -75,6 +61,7 @@ const Login = () => {
             placeholder="Enter your email"
             onChange={handleOnChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            required
           />
         </div>
         <div>
@@ -91,6 +78,7 @@ const Login = () => {
             placeholder="Enter your password"
             onChange={handleOnChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            required
           />
         </div>
         <button

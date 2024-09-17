@@ -29,8 +29,8 @@ const CreateEmployee = () => {
   const handleImageValidation = (e) => {
     const file = e.target.files[0];
 
-    // Validate file size (20 KB = 20 * 1024 bytes)
-    if (file && file.size > 20 * 1024) {
+    // Validate file size (100 KB = 20 * 1024 bytes)
+    if (file && file.size > 100 * 1024) {
       alert("File size exceeds 20 KB. Please select a smaller file.");
       return; // Exit if the file is too large
     }
@@ -67,6 +67,13 @@ const CreateEmployee = () => {
       setLoading(false);
       return;
     }
+
+    if (phone.length !== 10) {
+      alert("Phone number should be 10 digits");
+      setLoading(false);
+      return;
+    }
+
     axios
       .post("http://localhost:5000/api/v1/employees/new-employee", data)
       .then(() => {
@@ -140,7 +147,6 @@ const CreateEmployee = () => {
                 value="M"
                 checked={gender === "M"}
                 onChange={(e) => setGender(e.target.value)}
-                required
               />
               M
             </label>
@@ -170,7 +176,6 @@ const CreateEmployee = () => {
                     setCourse(course.filter((c) => c !== "MCA"));
                   }
                 }}
-                required
               />
               MCA
             </label>
@@ -212,6 +217,7 @@ const CreateEmployee = () => {
             type="file"
             accept=".jpg, .png"
             onChange={handleImageValidation}
+            required
           />
           {image && (
             <img

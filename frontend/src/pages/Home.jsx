@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Spinner from "../components/Spinner";
-import { json, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { AiOutlineEdit } from "react-icons/ai";
 import { BsInfoCircle } from "react-icons/bs";
 import { MdOutlineAddBox, MdOutlineDelete } from "react-icons/md";
@@ -15,17 +15,18 @@ const Home = () => {
   const [sortOrder, setSortOrder] = useState("asc");
 
   useEffect(() => {
-    setLoading(true);
-    axios
-      .get("http://localhost:5000/api/v1/employees")
-      .then((res) => {
+    const fetchEmployees = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get("http://localhost:5000/api/v1/employees");
         setEmployees(res.data.data.data);
         setLoading(false);
-      })
-      .catch((error) => {
-        console.log("Error fetching data: ", error);
+      } catch (error) {
+        console.error(error);
         setLoading(false);
-      });
+      }
+    };
+    fetchEmployees();
   }, []);
 
   // Sorting
@@ -101,9 +102,7 @@ const Home = () => {
               >
                 Unique ID
               </th>
-              <th className="border border-slate-600 rounded-md">
-                Image
-              </th>
+              <th className="border border-slate-600 rounded-md">Image</th>
               <th
                 onClick={() => sorting("name")}
                 className="border border-slate-600 rounded-md max-md:hidden hover:cursor-pointer"
@@ -116,9 +115,7 @@ const Home = () => {
               >
                 Email Id
               </th>
-              <th className="border border-slate-600 rounded-md">
-                Mobile No
-              </th>
+              <th className="border border-slate-600 rounded-md">Mobile No</th>
               <th className="border border-slate-600 rounded-md max-md:hidden">
                 Designation
               </th>

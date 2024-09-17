@@ -1,7 +1,9 @@
-import { Fragment } from "react";
+import { Fragment, useState } from "react";
 import { Disclosure, Menu, Transition } from "@headlessui/react";
 import { Bars3Icon, XMarkIcon } from "@heroicons/react/24/outline";
-
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
+import { toast } from "react-toastify";
 const navigation = [
   { name: "Dashboard", href: "/", current: true },
   { name: "Create Employee", href: "/employees/create", current: false },
@@ -12,7 +14,20 @@ function classNames(...classes) {
 }
 
 export default function Navbar() {
-  const username = "John Doe"; // Replace it with the logged-in user's name
+  const [user, setUser] = useState("");
+  const navigate = useNavigate();
+  const handleLogout = async () => {
+    try {
+      await axios.post("http://localhost:5000/api/v1/users/logout");
+      setUser("");
+      navigate("/login");
+      toast.success("Logged out successfully");
+    } catch (error) {
+      console.error(error);
+      toast.error("Failed to logout");
+    }
+  };
+
   return (
     <Disclosure as="nav" className="bg-gray-800">
       {({ open }) => (
@@ -36,7 +51,7 @@ export default function Navbar() {
                   <img
                     className="h-8 w-auto"
                     src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500"
-                    alt="Your Company"
+                    alt="DealsDray"
                   />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
@@ -68,8 +83,8 @@ export default function Navbar() {
                       <span className="sr-only">Open user menu</span>
                       <img
                         className="h-8 w-8 rounded-full"
-                        src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
-                        alt=""
+                        src="https://res.cloudinary.com/consolelog21/image/upload/v1726514028/dealsDray/binkcjqscu9foekzccir.png"
+                        alt="user image"
                       />
                     </Menu.Button>
                   </div>
@@ -92,7 +107,7 @@ export default function Navbar() {
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
                           >
-                            {username}
+                            {user.name}
                           </a>
                         )}
                       </Menu.Item>
@@ -104,8 +119,9 @@ export default function Navbar() {
                               active ? "bg-gray-100" : "",
                               "block px-4 py-2 text-sm text-gray-700"
                             )}
+                            onClick={handleLogout}
                           >
-                            Sign out
+                            Log Out
                           </a>
                         )}
                       </Menu.Item>

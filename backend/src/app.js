@@ -20,6 +20,7 @@ app.use(cookieParser());
 //routes import
 import userRoutes from "./routes/user.routes.js";
 import employeeRoutes from "./routes/employee.routes.js";
+import { verifyJwt } from "./middlewares/auth.middleware.js";
 
 //routes use
 app.get("/api/v1/", (req, res) => {

@@ -5,57 +5,47 @@ import { toast } from "react-toastify";
 
 const Signup = () => {
   const navigate = useNavigate();
-  const [inputValue, setInputValue] = useState({
+  const [formData, setFormData] = useState({
     email: "",
-    password: "",
     username: "",
+    password: "",
   });
-  const { email, password, username } = inputValue;
-  const handleOnChange = (e) => {
-    const { name, value } = e.target;
-    setInputValue({
-      ...inputValue,
-      [name]: value,
-    });
-  };
 
-  const handleError = (err) =>
-    toast.error(err, {
-      position: "bottom-left",
-    });
-  const handleSuccess = (msg) =>
-    toast.success(msg, {
-      position: "bottom-right",
-    });
+  const { email, username, password } = formData;
+
+  const handleOnChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const { data } = await axios.post(
+      const res = await axios.post(
         "http://localhost:5000/api/v1/users/register",
         {
-          ...inputValue,
-        },
-        { withCredentials: true }
+          email,
+          username,
+          password,
+        }
       );
-      const { success, message } = data;
+      const { success, message } = res.data;
       if (success) {
-        handleSuccess(message);
+        toast.success(message, {
+          position: "bottom-left",
+        });
         setTimeout(() => {
-          navigate("/");
+          navigate("/login");
         }, 1000);
       } else {
-        handleError(message);
+        toast.error(message, {
+          position: "bottom-left",
+        });
       }
     } catch (error) {
-      console.log(error);
+      toast.error("Server Error", {
+        position: "bottom-left",
+      });
     }
-    setInputValue({
-      ...inputValue,
-      email: "",
-      password: "",
-      username: "",
-    });
   };
 
   return (
@@ -76,6 +66,7 @@ const Signup = () => {
             placeholder="Enter your email"
             onChange={handleOnChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            required
           />
         </div>
         <div>
@@ -92,6 +83,7 @@ const Signup = () => {
             placeholder="Enter your username"
             onChange={handleOnChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            required
           />
         </div>
         <div>
@@ -108,6 +100,7 @@ const Signup = () => {
             placeholder="Enter your password"
             onChange={handleOnChange}
             className="w-full p-3 border border-gray-300 rounded-md focus:outline-none focus:border-blue-500"
+            required
           />
         </div>
         <button

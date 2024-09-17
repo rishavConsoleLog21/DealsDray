@@ -7,10 +7,12 @@ import ShowEmployee from "./pages/ShowEmployee";
 import EditEmployee from "./pages/EditEmployee";
 import DeleteEmployee from "./pages/DeleteEmployee";
 import NotFound from "./pages/NotFound";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
     <Routes>
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Signup />} />
