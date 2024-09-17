@@ -79,7 +79,7 @@ const CreateEmployee = () => {
       .then(() => {
         setLoading(false);
         toast.success("Employee added successfully");
-        navigate("/");
+        navigate("/home");
       })
       .catch((err) => {
         setLoading(false);

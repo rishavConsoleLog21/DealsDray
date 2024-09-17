@@ -83,7 +83,7 @@ const EditEmployee = () => {
       .then(() => {
         setLoading(false);
         toast.success("Employee updated successfully");
-        navigate("/");
+        navigate("/home");
       })
       .catch((err) => {
         setLoading(false);
@@ -93,7 +93,7 @@ const EditEmployee = () => {
   };
 
   const handleCancel = () => {
-    navigate("/");
+    navigate("/home");
   };
 
   return (

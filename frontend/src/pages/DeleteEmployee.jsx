@@ -18,7 +18,7 @@ const DeleteEmployee = () => {
       .then(() => {
         setLoading(false);
         toast.success("Employee deleted successfully");
-        navigate("/");
+        navigate("/home");
       })
       .catch((err) => {
         setLoading(false);

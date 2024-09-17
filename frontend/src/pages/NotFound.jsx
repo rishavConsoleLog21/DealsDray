@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 const NotFound = () => {
   const navigate = useNavigate();
   const handleHomeClick = () => {
-    navigate("/");
+    navigate("/home");
   };
   return (
     <div className="not-found-container h-screen flex flex-col items-center justify-center bg-gray-100 text-center p-6">
@@ -24,7 +24,7 @@ const NotFound = () => {
       </button>
       <p className="text-gray-500 mt-4">
         If you think this is an error, please{" "}
-        <a href="/" className="text-blue-500 hover:underline">
+        <a href="/home" className="text-blue-500 hover:underline">
           contact us
         </a>
         .
