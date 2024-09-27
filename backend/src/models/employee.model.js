@@ -19,8 +19,6 @@ const empolyeeSchema = new Schema(
     course: { type: String, required: [true, "Course is required"] },
     image: {
       type: String,
-      default:
-        "https://res.cloudinary.com/consolelog21/image/upload/v1726514028/dealsDray/binkcjqscu9foekzccir.png",
     },
   },
   {

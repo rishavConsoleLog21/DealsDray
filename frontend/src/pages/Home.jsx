@@ -76,7 +76,7 @@ const Home = () => {
           <MdOutlineAddBox className="text-4xl text-emerald-600" />
         </Link>
       </div>
-      <div className="flex justify-end items-center gap-x-4">
+      <div className="flex justify-end items-center gap-x-4 mr-2">
         <input
           type="text"
           placeholder="Search Employee"
@@ -84,9 +84,6 @@ const Home = () => {
           value={searchQuery}
           onChange={(e) => setSearchQuery(e.target.value)}
         />
-        <button className="bg-blue-600 text-white p-2 rounded-md">
-          Search
-        </button>
       </div>
       <br />
       {loading ? (
